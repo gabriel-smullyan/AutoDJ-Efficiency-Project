@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import edu.ithaca.autodj.Song;
-import edu.ithaca.autodj.io.JsonUtil;
+import io.JsonUtil;
 
 public class SongDataIO {    
 
