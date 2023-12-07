@@ -1,29 +1,28 @@
 package interfaces;
 
-public interface Playlist<T> {
-    /*thik about making a linked list and a stack */
+public interface Playlist<Song> {
+    /*thik about making a linked list and a Arraystack */
     /*
      * @post adds song to end of playlist
      */
-    void addSong(T song);
+    void addSong(Song song);
 
     /*
-     * @post removes next song in playlist
-     * @return song removed
+     * @post removes a specific song from playlist
      */
-    T removeSong();
+    void removeSong(Song song);
 
     /*
      * @post plays next song and removes current from playlist
      * @return song and info
      */
-    T playNext();
+    public Song playNext();
 
     /*
      * @post returns total duration of playlist
      */
 
-    T duration();
+    int duration();
 
     /*
      * @post return a string of all songs in playlist
