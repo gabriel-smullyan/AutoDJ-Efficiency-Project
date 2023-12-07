@@ -3,6 +3,7 @@ package interfaces;
 import java.util.NoSuchElementException;
 
 public interface Queue<T> {
+    /*think about making a stack and a linked list. */
     
     /**
      * @post puts an item onto the "end" of the queue

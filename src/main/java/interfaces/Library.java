@@ -3,6 +3,7 @@ package interfaces;
 import java.util.List;
 
 public interface Library {
+    /*think about implementing as ArrayList for easy access of indices */
     /**
      * @post returns all the songs in the library in alphabetical order
      */

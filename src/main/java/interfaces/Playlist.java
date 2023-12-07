@@ -1,7 +1,7 @@
 package interfaces;
 
 public interface Playlist<T> {
-    
+    /*thik about making a linked list and a stack */
     /*
      * @post adds song to end of playlist
      */
@@ -14,7 +14,7 @@ public interface Playlist<T> {
     T removeSong();
 
     /*
-     * @post plays next song and removs current from playlist
+     * @post plays next song and removes current from playlist
      * @return song and info
      */
     T playNext();

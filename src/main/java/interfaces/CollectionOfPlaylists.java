@@ -1,6 +1,8 @@
 package interfaces;
 
 public interface CollectionOfPlaylists {
+/** think about implementing as HashMap */
+
     /**
      * @post returns the name and duration of all the playlists in the collection
      */
