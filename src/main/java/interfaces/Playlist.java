@@ -1,5 +1,7 @@
 package interfaces;
 
+import java.util.List;
+
 public interface Playlist<Song> {
     /*thik about making a linked list and a Arraystack */
     /*
@@ -28,4 +30,12 @@ public interface Playlist<Song> {
      * @post return a string of all songs in playlist
      */
     String allSongs();
+
+
+    /*
+     * @post adds song to start of playlist
+     */
+    void addSongToStart(Song song);
 }
+
+

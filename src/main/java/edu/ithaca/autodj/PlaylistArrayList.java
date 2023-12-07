@@ -51,13 +51,19 @@ public class PlaylistArrayList implements Playlist<Song>{
     public String allSongs(){
         String temp = "";
         for (int i = 0; i < size; i++){
-            temp += playlist.get(i).getTitle() + " by " + playlist.get(i).getArtist() + "\n";
+            temp += playlist.get(i).toString() + "\n";
         }
         return temp;
     }
 
     public int getSize(){
         return size;
+    }
+
+    public void addSongToStart(Song song){
+        playlist.add(0, song);
+        size++;
+        duration += song.getDuration();
     }
 }
 

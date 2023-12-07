@@ -39,9 +39,9 @@ public class playlistArrayListTest {
         playlist.addSong(song2);
         playlist.addSong(song3);
         playlist.removeSong(song2);
-        assertEquals("Song1 by Artist1\nSong3 by Artist3\n", playlist.allSongs());
+        assertEquals("Song1 by Artist1: 100\nSong3 by Artist3: 100\n", playlist.allSongs());
         playlist.removeSong(song1);
-        assertEquals("Song3 by Artist3\n", playlist.allSongs());
+        assertEquals("Song3 by Artist3: 100\n", playlist.allSongs());
         playlist.removeSong(song3);
         assertEquals("", playlist.allSongs());
         assertThrows(IllegalArgumentException.class, () -> {
@@ -89,10 +89,31 @@ public class playlistArrayListTest {
         PlaylistArrayList playlist = new PlaylistArrayList();
         assertEquals("", playlist.allSongs());
         playlist.addSong(song1);
-        assertEquals("Song1 by Artist1\n", playlist.allSongs());
+        assertEquals("Song1 by Artist1: 100\n", playlist.allSongs());
         playlist.addSong(song2);
-        assertEquals("Song1 by Artist1\nSong2 by Artist2\n", playlist.allSongs());
+        assertEquals("Song1 by Artist1: 100\nSong2 by Artist2: 100\n", playlist.allSongs());
         playlist.addSong(song3);
-        assertEquals("Song1 by Artist1\nSong2 by Artist2\nSong3 by Artist3\n", playlist.allSongs());
+        assertEquals("Song1 by Artist1: 100\nSong2 by Artist2: 100\nSong3 by Artist3: 100\n", playlist.allSongs());
+
+    }
+    @Test 
+    public void testAddSongToStart(){
+        Song song1 = new Song("Artist1", "Song1", 100, 0, 0, 0, 0, 0);
+        Song song2 = new Song("Artist2", "Song2", 100, 0, 0, 0, 0, 0);
+        Song song3 = new Song("Artist3","Song3", 100, 0, 0, 0, 0, 0);
+        PlaylistArrayList playlist = new PlaylistArrayList();
+        assertEquals(0, playlist.getSize());
+        playlist.addSongToStart(song1);
+        assertEquals(1, playlist.getSize());
+        assertEquals("Song1 by Artist1: 100\n", playlist.allSongs());
+        playlist.addSongToStart(song2);
+        assertEquals("Song2 by Artist2: 100\nSong1 by Artist1: 100\n", playlist.allSongs());
+        playlist.addSongToStart(song3);
+        assertEquals("Song3 by Artist3: 100\nSong2 by Artist2: 100\nSong1 by Artist1: 100\n", playlist.allSongs());
+        assertEquals(3, playlist.getSize());
+
+
+
+
     }
 }
