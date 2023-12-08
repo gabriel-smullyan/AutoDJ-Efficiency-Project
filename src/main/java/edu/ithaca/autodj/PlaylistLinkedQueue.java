@@ -67,7 +67,7 @@ public class PlaylistLinkedQueue implements Playlist<Song>{
     }
 
     @Override
-    public int duration() {
+    public int totalDuration() {
         if (front == null){
             return 0;
         }

@@ -43,7 +43,7 @@ public class PlaylistArrayList implements Playlist<Song>{
         return temp;
     }
     @Override
-    public int duration(){
+    public int totalDuration(){
         return duration;
     }
 
