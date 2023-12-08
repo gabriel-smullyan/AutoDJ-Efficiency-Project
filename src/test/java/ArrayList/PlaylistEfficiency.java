@@ -49,6 +49,23 @@ public class PlaylistEfficiency {
         }
     }
 
+    public static long timeAddSongToStart(Playlist<Song> playlist, Song song) {
+        long startTime = System.nanoTime();
+        playlist.addSongToStart(song);
+        long endTime = System.nanoTime();
+        return endTime - startTime;
+    }
+
+    public static long averageTimeAddSongToStart(Playlist<Song> playlist, Song song, int numTimes) {
+        long totalTime = 0;
+        for (int i = 0; i < numTimes; i++) {
+            totalTime += timeAddSongToStart(playlist, song);
+        }
+        return totalTime / numTimes;
+    }
+
+
+
 
 
     
@@ -67,7 +84,36 @@ public class PlaylistEfficiency {
         }
         return dataset;
     }
+    public static long timeTotalDuration(Playlist<Song> playlist) {
+        long startTime = System.nanoTime();
+        playlist.totalDuration();
+        long endTime = System.nanoTime();
+        return endTime - startTime;
+    }
 
+    public static long averageTimeTotalDuration(Playlist<Song> playlist, int numTimes) {
+        long totalTime = 0;
+        for (int i = 0; i < numTimes; i++) {
+            totalTime += timeTotalDuration(playlist);
+        }
+        return totalTime / numTimes;
+    }
+
+    public static DefaultCategoryDataset collectPlaylistEfficiencyTotalDurationData(Playlist<Song> playlist, String playlistImplementationType) {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        int putCount = 10000;
+        int numTimes = 50;
+        int numDataPointToPrint = 50;
+        System.out.println("Starting " + playlistImplementationType + " total duration efficiency test");
+        for (int i = 0; i < numDataPointToPrint; i++) {
+            addManySongs(i, playlist);
+            double avgTime = averageTimeTotalDuration(playlist, numTimes);
+            System.out.println((i+1)*putCount + " \t\t " + avgTime);     
+            String s = avgTime + "";   
+            dataset.addValue((i+1)*putCount, playlistImplementationType, s);
+        }
+        return dataset;
+    }
     public static DefaultCategoryDataset collectPlaylistEfficiencyRemoveData(Playlist<Song> playlist, String playlistImplementationType) {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         int putCount = 10000;
@@ -84,11 +130,118 @@ public class PlaylistEfficiency {
         return dataset;
     }
 
+    public static DefaultCategoryDataset collectPlaylistEfficiencyAddToStartData(Playlist<Song> playlist, String playlistImplementationType) {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        int putCount = 10000;
+        int numTimes = 50;
+        int numDataPointToPrint = 50;
+        System.out.println("Starting " + playlistImplementationType + " add to start efficiency test");
+        for (int i = 0; i < numDataPointToPrint; i++) {
+            addManySongs(i, playlist);
+            double avgTime = averageTimeAddSongToStart(playlist, new Song("Song " + i, "Artist " + i, 100, 0,0 ,0 ,0 ,0 ), numTimes);
+            System.out.println((i+1)*putCount + " \t\t " + avgTime);     
+            String s = avgTime + "";   
+            dataset.addValue((i+1)*putCount, playlistImplementationType, s);
+        }
+        return dataset;
+    }
+
+    public static long timePlayNext(Playlist<Song> playlist) {
+        long startTime = System.nanoTime();
+        playlist.playNext();
+        long endTime = System.nanoTime();
+        return endTime - startTime;
+    
+    }
+
+    public static long averageTimePlayNext(Playlist<Song> playlist, int numTimes) {
+        long totalTime = 0;
+        for (int i = 0; i < numTimes; i++) {
+            totalTime += timePlayNext(playlist);
+        }
+        return totalTime / numTimes;
+    }
+
+    public static DefaultCategoryDataset collectPlaylistEfficiencyPlayNextData(Playlist<Song> playlist, String playlistImplementationType) {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        int putCount = 10000;
+        int numTimes = 50;
+        int numDataPointToPrint = 50;
+        System.out.println("Starting " + playlistImplementationType + " playNext efficiency test");
+        for (int i = 0; i < numDataPointToPrint; i++) {
+            addManySongs(i, playlist);
+            double avgTime = averageTimePlayNext(playlist, numTimes);
+            System.out.println((i+1)*putCount + " \t\t " + avgTime);     
+            String s = avgTime + "";   
+            dataset.addValue((i+1)*putCount, playlistImplementationType, s);
+        }
+        return dataset;
+    }
+
+    public static long timeGetSize(Playlist<Song> playlist) {
+        long startTime = System.nanoTime();
+        playlist.getSize();
+        long endTime = System.nanoTime();
+        return endTime - startTime;
+        }
+
+    public static double averageTimeGetSize(Playlist<Song> playlist, int numTimes) {
+        long totalTime = 0;
+        for (int i = 0; i < numTimes; i++) {
+            totalTime += timePlayNext(playlist);
+        }
+        return totalTime / numTimes;
+        }
+
+    public static DefaultCategoryDataset collectPlaylistEfficiencyGetSizeData(Playlist<Song> playlist, String playlistImplementationType) {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        int putCount = 10000;
+        int numTimes = 50;
+        int numDataPointToPrint = 50;
+        System.out.println("Starting " + playlistImplementationType + " getSize efficiency test");
+        for (int i = 0; i < numDataPointToPrint; i++) {
+            addManySongs(i, playlist);
+            double avgTime = averageTimeGetSize(playlist, numTimes);
+            System.out.println((i+1)*putCount + " \t\t " + avgTime);
+            String s = avgTime + "";
+            dataset.addValue((i+1)*putCount, playlistImplementationType, s);
+        }
+        return dataset;
+    }
+
+
+
+    public static void timeAllSongs(Playlist<Song> playlist) {
+        long startTime = System.nanoTime();
+        playlist.allSongs();
+        long endTime = System.nanoTime();
+        System.out.println(endTime - startTime);
+    }
+
+    public static void averageTimeAllSongs(Playlist<Song> playlist, int numTimes) {
+        long totalTime = 0;
+        for (int i = 0; i < numTimes; i++) {
+            totalTime += timePlayNext(playlist);
+        }
+        System.out.println(totalTime / numTimes);
+    }
+
+
+
     public static void main(String[] args){
-        new EfficiencyChart(collectArrayListEfficiencyAddData(new PlaylistArrayList(), "ArrayListPlaylist-Add"));
-        new EfficiencyChart(collectArrayListEfficiencyAddData(new PlaylistLinkedQueue(), "LinkedQueuePlaylist-Add"));
-        new EfficiencyChart(collectArrayListEfficiencyRemoveData(new PlaylistArrayList(), "ArrayListPlaylist-Remove"));
-        new EfficiencyChart(collectArrayListEfficiencyRemoveData(new PlaylistLinkedQueue(), "LinkedQueuePlaylist-Remove"));
+        new EfficiencyChart(collectPlaylistEfficiencyAddData(new PlaylistArrayList(), "ArrayListPlaylist-Add"));
+        new EfficiencyChart(collectPlaylistEfficiencyAddData(new PlaylistLinkedQueue(), "LinkedQueuePlaylist-Add"));
+        new EfficiencyChart(collectPlaylistEfficiencyRemoveData(new PlaylistArrayList(), "ArrayListPlaylist-Remove"));
+        new EfficiencyChart(collectPlaylistEfficiencyRemoveData(new PlaylistLinkedQueue(), "LinkedQueuePlaylist-Remove"));
+        new EfficiencyChart(collectPlaylistEfficiencyAddToStartData(new PlaylistArrayList(), "ArrayListPlaylist-AddToStart"));
+        new EfficiencyChart(collectPlaylistEfficiencyAddToStartData(new PlaylistLinkedQueue(), "LinkedQueuePlaylist-AddToStart"));
+        new EfficiencyChart(collectPlaylistEfficiencyPlayNextData(new PlaylistArrayList(), "ArrayListPlaylist-PlayNext"));
+        new EfficiencyChart(collectPlaylistEfficiencyPlayNextData(new PlaylistLinkedQueue(), "LinkedQueuePlaylist-PlayNext"));
+        new EfficiencyChart(collectPlaylistEfficiencyTotalDurationData(new PlaylistArrayList(), "ArrayListPlaylist-TotalDuration"));
+        new EfficiencyChart(collectPlaylistEfficiencyTotalDurationData(new PlaylistLinkedQueue(), "LinkedQueuePlaylist-TotalDuration"));
+        new EfficiencyChart(collectPlaylistEfficiencyGetSizeData(new PlaylistArrayList(), "ArrayListPlaylist-GetSize"));
+        new EfficiencyChart(collectPlaylistEfficiencyGetSizeData(new PlaylistLinkedQueue(), "LinkedQueuePlaylist-GetSize"));
+
     }
 
 }
