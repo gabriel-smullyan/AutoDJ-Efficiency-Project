@@ -11,7 +11,7 @@ public class Song {
     private double spotifyValence;
     
     
-    public Song(){}
+    public Song(){} 
 
     public Song(String artist, String title, int duration, int playCount, int spotifyPopularity, double spotifyDanceability,
             double spotifyEnergy, double spotifyValence) {

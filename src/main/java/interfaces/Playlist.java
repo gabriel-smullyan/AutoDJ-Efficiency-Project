@@ -1,36 +1,34 @@
 package interfaces;
 
-import java.util.List;
-
 public interface Playlist<Song> {
-    /*thik about making a linked list and a Arraystack */
+    
     /*
      * @post adds song to end of playlist
      */
     void addSong(Song song);
 
     /*
-     * @post removes a specific song from playlist
+     * @post removes next song in playlist
+     * @return string of song removed
      */
-    void removeSong(Song song);
+    void removeSong(Song song );
 
     /*
      * @post plays next song and removes current from playlist
      * @return song and info
      */
-    public Song playNext();
+    Song playNext();
 
     /*
      * @post returns total duration of playlist
      */
 
-    int duration();
+    int totalDuration();
 
     /*
      * @post return a string of all songs in playlist
      */
     String allSongs();
-
 
     /*
      * @post adds song to start of playlist
@@ -42,8 +40,5 @@ public interface Playlist<Song> {
      * @post returns the size of the playlist - 0 when empty and 1+ when not empty
      */
     int getSize();
-    
 }
-
-
 
