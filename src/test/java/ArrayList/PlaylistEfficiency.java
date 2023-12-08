@@ -52,7 +52,7 @@ public class PlaylistEfficiency {
 
 
     
-    public static DefaultCategoryDataset collectArrayListEfficiencyAddData(Playlist<Song> playlist, String playlistImplementationType) {
+    public static DefaultCategoryDataset collectPlaylistEfficiencyAddData(Playlist<Song> playlist, String playlistImplementationType) {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         int putCount = 10000;
         int numTimes = 50;
@@ -68,10 +68,27 @@ public class PlaylistEfficiency {
         return dataset;
     }
 
+    public static DefaultCategoryDataset collectPlaylistEfficiencyRemoveData(Playlist<Song> playlist, String playlistImplementationType) {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        int putCount = 10000;
+        int numTimes = 50;
+        int numDataPointToPrint = 50;
+        System.out.println("Starting " + playlistImplementationType + " remove efficiency test");
+        for (int i = 0; i < numDataPointToPrint; i++) {
+            addManySongs(i, playlist);
+            double avgTime = averageTimeRemoveSong(playlist, new Song("Song " + i, "Artist " + i, 100, 0,0 ,0 ,0 ,0 ), numTimes);
+            System.out.println((i+1)*putCount + " \t\t " + avgTime);     
+            String s = avgTime + "";   
+            dataset.addValue((i+1)*putCount, playlistImplementationType, s);
+        }
+        return dataset;
+    }
+
     public static void main(String[] args){
-        new EfficiencyChart(collectArrayListEfficiencyAddData(new PlaylistArrayList(), "ArrayListPlaylist"));
-        new EfficiencyChart(collectArrayListEfficiencyAddData(new PlaylistLinkedQueue(), "LinkedQueuePlaylist"));
-         
+        new EfficiencyChart(collectArrayListEfficiencyAddData(new PlaylistArrayList(), "ArrayListPlaylist-Add"));
+        new EfficiencyChart(collectArrayListEfficiencyAddData(new PlaylistLinkedQueue(), "LinkedQueuePlaylist-Add"));
+        new EfficiencyChart(collectArrayListEfficiencyRemoveData(new PlaylistArrayList(), "ArrayListPlaylist-Remove"));
+        new EfficiencyChart(collectArrayListEfficiencyRemoveData(new PlaylistLinkedQueue(), "LinkedQueuePlaylist-Remove"));
     }
 
 }
