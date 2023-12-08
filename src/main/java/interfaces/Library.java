@@ -1,5 +1,5 @@
 package interfaces;
-
+import edu.ithaca.autodj.Song;
 import java.util.List;
 
 public interface Library {
@@ -12,7 +12,7 @@ public interface Library {
     /** 
      * @post returns a Song within the library
      */
-    Song getSong(String songName);
+    Playlist getSong(String songName);
 
     /**
      * @post adds a song to the library
