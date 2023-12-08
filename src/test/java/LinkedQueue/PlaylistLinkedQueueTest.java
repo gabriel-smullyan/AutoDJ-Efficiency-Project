@@ -46,13 +46,13 @@ public class PlaylistLinkedQueueTest {
         Song song2 = new Song("Artist2", "Song2", 100, 0, 0, 0, 0, 0);
         Song song3 = new Song("Artist3","Song3", 100, 0, 0, 0, 0, 0);
         PlaylistLinkedQueue playlist = new PlaylistLinkedQueue();
-        assertEquals(0, playlist.duration());
+        assertEquals(0, playlist.totalDuration());
         playlist.addSong(song1);
-        assertEquals(100, playlist.duration());
+        assertEquals(100, playlist.totalDuration());
         playlist.addSong(song2);
-        assertEquals(200, playlist.duration());
+        assertEquals(200, playlist.totalDuration());
         playlist.addSong(song3);
-        assertEquals(300, playlist.duration());    }
+        assertEquals(300, playlist.totalDuration());    }
 
     @Test
     public void allSongsTest(){
@@ -84,7 +84,7 @@ public class PlaylistLinkedQueueTest {
         playlist.addSongToStart(song3);
         System.out.println(playlist.allSongs());
         System.out.println(playlist.getSize());
-        System.out.println(playlist.duration());
+        System.out.println(playlist.totalDuration());
         assertEquals("Song3 by Artist3: 100\nSong2 by Artist2: 100\nSong1 by Artist1: 100\n", playlist.allSongs());
         assertEquals(3, playlist.getSize());
 

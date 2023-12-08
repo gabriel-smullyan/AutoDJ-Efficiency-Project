@@ -71,13 +71,13 @@ public class playlistArrayListTest {
         Song song2 = new Song("Artist2", "Song2", 100, 0, 0, 0, 0, 0);
         Song song3 = new Song("Artist3","Song3", 100, 0, 0, 0, 0, 0);
         PlaylistArrayList playlist = new PlaylistArrayList();
-        assertEquals(0, playlist.duration());
+        assertEquals(0, playlist.totalDuration());
         playlist.addSong(song1);
-        assertEquals(100, playlist.duration());
+        assertEquals(100, playlist.totalDuration());
         playlist.addSong(song2);
-        assertEquals(200, playlist.duration());
+        assertEquals(200, playlist.totalDuration());
         playlist.addSong(song3);
-        assertEquals(300, playlist.duration());
+        assertEquals(300, playlist.totalDuration());
 
     }
 
