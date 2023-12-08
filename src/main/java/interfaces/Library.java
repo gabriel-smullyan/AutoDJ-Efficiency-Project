@@ -1,18 +1,18 @@
 package interfaces;
-import edu.ithaca.autodj.Song;
+import java.util.ArrayList;
 import java.util.List;
 
-public interface Library {
-    /*think about implementing as ArrayList for easy access of indices */
+public interface Library<Song> {
+    /*think about implementing as HashMap for easy access of keys */
     /**
      * @post returns all the songs in the library in alphabetical order
      */
-    String allSongsAlpabetical();
+    String allSongsAlphabetical();
 
     /** 
      * @post returns a Song within the library
      */
-    Playlist getSong(String songName);
+    Song getSong(String songName);
 
     /**
      * @post adds a song to the library
@@ -27,10 +27,16 @@ public interface Library {
     /**
      * @post adds an collection of songs to the library
      */
-    void addAlbumOfSongs(List<Song> songs);
+    void addAlbumOfSongs(ArrayList<Song> songs);
 
     /**
      * @post removes a collection of songs from the library
      */
-    void removeAlbumOfSongs(List<Song> songs);
+    void removeAlbumOfSongs(ArrayList<Song> songs);
+
+    /**
+     * @post returns the size of the library - 0 when empty and 1+ when not empty
+     */
+    int getSize();
+
 }
