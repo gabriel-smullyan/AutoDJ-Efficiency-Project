@@ -27,42 +27,64 @@ public class PlaylistLinkedQueue implements Playlist<Song>{
     }
 
     @Override
-    public String removeSong(Song SongToRemove) {
+    public void removeSong(Song SongToRemove) {
         if (front == null){
             throw new NoSuchElementException("Playlist is empty");
         }
-        
-        String songRemoved = front.getNext().getItem().toString();
-        LinkedNode<Song> newNextSong = front.getNext().getNext();
-        front.setNext(newNextSong);
 
-        return songRemoved;
+    while (front != null && front.getItem().equals(SongToRemove)) {
+        front = front.getNext();
+    }
+
+    if (front == null) {
+        end = null;
+        return;
+    }
+
+    LinkedNode<Song> current = front;
+    while (current.getNext() != null) {
+        if (current.getNext().getItem().equals(SongToRemove)) {
+            current.setNext(current.getNext().getNext());
+            if (current.getNext() == null) {
+                end = current;
+            }
+        } else {
+            current = current.getNext();
+        }
+    }
     }
 
     @Override
-    public String playNext() {
+    public Song playNext() {
         if (front == null){
             throw new NoSuchElementException("Playlist is empty");
         }
 
-        String currentSong = front.getItem().toString();
+        Song currentSong = front.getItem();
         front = front.getNext();
 
         return currentSong;
     }
 
     @Override
-    public int totalDuration() {
+    public int duration() {
+        if (front == null){
+            return 0;
+        }
         LinkedNode<Song> current = front;
         int duration = 0;
 
-        while (current.getNext() != null){
-            duration+= current.getItem().getDuration();
+        while (current != null){
+            duration += current.getItem().getDuration();
 
-            current.getNext();
+            if (current.getNext() == null){
+                return duration;
+            }
+            current = current.getNext();
         }
-
         return duration;
+
+        
     }
 
     @Override
@@ -70,11 +92,43 @@ public class PlaylistLinkedQueue implements Playlist<Song>{
         LinkedNode<Song> current = front;
         String allsongs = "";
 
-        while (current.getNext() != null){
+        while (current != null){
             allsongs += current.getItem().toString() + "\n";
+
+            if (current.getNext() == null){
+                return allsongs;
+            }
+            current = current.getNext();
         }
 
         return allsongs;
     }
     
+    @Override
+    public int getSize(){
+        LinkedNode<Song> current = front;
+        if (front == null){
+            return 0;
+        }
+        int size = 1;
+
+        while (current.getNext() != null){
+            size++;
+            current = current.getNext();
+        }
+
+        return size;
+    }
+
+    @Override
+    public void addSongToStart(Song song) {
+        LinkedNode<Song> newSong = new LinkedNode<Song>(song);
+        if (front == null){
+            front = newSong;
+            end = newSong;
+        } else {
+            newSong.setNext(front);
+            front = newSong;
+        }
+    }
 }

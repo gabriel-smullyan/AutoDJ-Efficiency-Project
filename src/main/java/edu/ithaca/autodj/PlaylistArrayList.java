@@ -12,13 +12,13 @@ public class PlaylistArrayList implements Playlist<Song>{
         size = 0;
         duration = 0;
     }
-
+    @Override
     public void addSong(Song song){
         playlist.add(song);
         size++;
         duration += song.getDuration();
     }
-
+    @Override
     public void removeSong(Song song){
         if (size == 0){
             throw new IllegalArgumentException("Playlist is empty");
@@ -31,7 +31,7 @@ public class PlaylistArrayList implements Playlist<Song>{
             }
         }
     }
-
+    @Override
     public Song playNext(){
         if (size == 0){
             throw new IllegalArgumentException("Playlist is empty");
@@ -42,12 +42,12 @@ public class PlaylistArrayList implements Playlist<Song>{
         duration -= temp.getDuration();
         return temp;
     }
-
+    @Override
     public int duration(){
         return duration;
     }
 
-
+    @Override
     public String allSongs(){
         String temp = "";
         for (int i = 0; i < size; i++){
@@ -56,10 +56,12 @@ public class PlaylistArrayList implements Playlist<Song>{
         return temp;
     }
 
+    @Override
     public int getSize(){
         return size;
     }
 
+    @Override
     public void addSongToStart(Song song){
         playlist.add(0, song);
         size++;

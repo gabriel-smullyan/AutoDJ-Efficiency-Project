@@ -112,8 +112,5 @@ public class playlistArrayListTest {
         assertEquals("Song3 by Artist3: 100\nSong2 by Artist2: 100\nSong1 by Artist1: 100\n", playlist.allSongs());
         assertEquals(3, playlist.getSize());
 
-
-
-
     }
 }

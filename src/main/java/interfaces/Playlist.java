@@ -36,6 +36,14 @@ public interface Playlist<Song> {
      * @post adds song to start of playlist
      */
     void addSongToStart(Song song);
+
+
+    /*
+     * @post returns the size of the playlist - 0 when empty and 1+ when not empty
+     */
+    int getSize();
+    
 }
+
 
 
